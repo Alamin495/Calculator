@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"
+  <title>Calculator</title>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" readonly>
+    <div class="buttons">
+      <button class="btn">7</button>
+      <button class="btn">8</button>
+      <button class="btn">9</button>
+      <button class="btn operator">+</button>
+      <button class="btn">4</button>
+      <button class="btn">5</button>
+      <button class="btn">6</button>
+      <button class="btn operator">-</button>
+      <button class="btn">1</button>
+      <button class="btn">2</button>
+      <button class="btn">3</button>
+      <button class="btn operator">*</button>
+      <button class="btn" id="clear">C</button>
+      <button class="btn">0</button>
+      <button class="btn operator">=</button>
+      <button class="btn operator">/</button>
+    </div>
+  </div>
+  <style>
+    body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.calculator {
+  background-color: #333;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#display {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  background-color: #222;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-align: right;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  background-color: #444;
+  color: #fff;
+  cursor: pointer;
+}
+
+.operator {
+  background-color: #f44336;
+}
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const display = document.getElementById("display");
+    const buttons = document.querySelectorAll(".btn");
+    let currentInput = "";
+    
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const buttonText = button.textContent;
+        
+        if (buttonText === "=") {
+          try {
+            currentInput = eval(currentInput);
+            display.value = currentInput;
+          } catch (error) {
+            display.value = "Error";
+          }
+        } else if (buttonText === "C") {
+          currentInput = "";
+          display.value = "";
+        } else {
+          currentInput += buttonText;
+          display.value = currentInput;
+        }
+      });
+    });
+  });
+  </script>
+</body>
+</html>
